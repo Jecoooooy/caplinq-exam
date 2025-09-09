@@ -15,7 +15,12 @@ export default defineNuxtConfig({
         "shadcn-nuxt",
         "@nuxtjs/device",
         "@vueuse/nuxt",
+        ["@pinia/nuxt", { autoImports: ["defineStore", "acceptHMRUpdate"] }],
     ],
+    pinia: {
+        storesDirs: ["./app/store/**"],
+    },
+    imports: { dirs: ["./app/store"] },
     shadcn: {
         prefix: "",
         componentDir: "./app/components/ui",

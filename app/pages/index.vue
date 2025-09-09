@@ -2,7 +2,7 @@
     <section class="container h-svh py-20 mx-auto">
         <Card class="shadow-md h-full relative">
             <Browse></Browse>
-            <CardContent class="h-full">
+            <CardContent class="h-full md:px-16">
                 <Datatable
                     title="Product Search"
                     :items="allProducts"
@@ -11,17 +11,22 @@
                     :error="null"
                     :headers="[
                         {
+                            value: 'id',
+                            text: 'ID',
+                            searchable: true,
+                            width: '300px',
+                            class: 'text-center',
+                        },
+                        {
                             value: 'name',
                             text: 'Product Name',
                             searchable: true,
                             width: '200px',
                             class: 'text-center',
-                            tooltip: true,
                         },
                         {
                             value: 'supplierId',
                             text: 'Suplier Id',
-                            width: '200px',
                             class: 'text-center',
                             searchable: true,
                             tooltip: true,
@@ -29,6 +34,7 @@
                         {
                             value: 'childProducts',
                             text: 'Suplier Id',
+                            width: '200px',
                             class: 'text-center',
                             searchable: true,
                             tooltip: true,
@@ -40,10 +46,14 @@
     </section>
 </template>
 <script lang="ts" setup>
-const {
-    data: products,
-    pending: productsPending,
-    error: productsError,
-} = await useFetch("/api/products");
-const allProducts = computed(() => products.value?.data ?? []);
+const productStore = useProduct();
+const allProducts = computed(() => productStore.products?.data ?? []);
+
+await productStore.getProductPaginate();
+const productsPending = ref(true);
+onMounted(() =>
+    setTimeout(() => {
+        productsPending.value = false;
+    }, 4000),
+);
 </script>

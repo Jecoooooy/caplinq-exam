@@ -1,8 +1,7 @@
 import type { VariantProps } from "class-variance-authority";
 import { cva } from "class-variance-authority";
-import { cn } from "@/lib/utils";
 export { default as Button } from "./Button.vue";
-
+import { cn } from "@/lib/utils";
 type RemoveAutoVariant<T extends { variant?: string }> = Omit<T, "variant"> & {
     variant?: Exclude<T["variant"], "auto">;
 };
@@ -92,31 +91,14 @@ export const buttonVariants = (baseProps: Props) => {
             key === "default" && `text-${color}-foreground bg-${color}`,
         );
     });
-    const computedDefaultVariant = props.isAutoVariant ? "outline" : "default";
-    function computeIconSize(): "icon-sm" | "icon-md" | "icon-lg" {
-        const base: "sm" | "md" | "lg" = isBoolean(props.icon)
-            ? "md"
-            : (props.icon ?? "md");
-        if (base === "sm") return "icon-sm";
-        if (base === "lg") return "icon-lg";
-        return "icon-md";
-    }
-    const computedDefaultSize:
-        | "default"
-        | "sm"
-        | "lg"
-        | "icon-xs"
-        | "icon-sm"
-        | "icon-md"
-        | "icon-lg" = props.icon ? computeIconSize() : "default";
 
     return cva(
         "inline-flex cursor-pointer relative items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-25",
         {
-            variants,
+            variants: variants,
             defaultVariants: {
-                variant: computedDefaultVariant,
-                size: computedDefaultSize,
+                variant: "default",
+                size: "default",
                 elevation: 0,
             },
         },

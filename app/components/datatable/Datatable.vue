@@ -6,12 +6,12 @@
     >
         <!-- Title and Subtitle -->
         <header
-            class="flex justify-center gap-4 max-md:flex-col md:items-center"
+            class="flex justify-center pb-2 gap-4 max-md:flex-col md:items-center"
         >
             <hgroup>
                 <h2
                     :id="uniqueId"
-                    class="text-2xl text-muted-foreground font-bold"
+                    class="tracking-wide text-xl text-muted-foreground"
                 >
                     {{ title }}
                 </h2>
@@ -24,8 +24,9 @@
         <Input
             v-model="search"
             :placeholder="searchPlaceholder"
-            container-class="w-full sm:w-64"
             @input="currentPage = 1"
+            :icon="{ name: 'magnify', size: 32 }"
+            class="h-16 pl-6 text-xl"
         />
         <!-- Table -->
         <Table>
@@ -61,9 +62,9 @@
                         >
                             <div
                                 :style="{
-                                    animationDelay: `${(i + index + 1) * 50}ms`,
+                                    animationDelay: `${(i + index + 1) * 40}ms`,
                                 }"
-                                class="bg-primary/50 h-4 animate-pulse rounded"
+                                class="bg-primary/80 h-4 animate-pulse rounded"
                             />
                         </TableCell>
                     </TableRow>
@@ -197,11 +198,13 @@
             <DialogContent class="bg-popover !max-w-200">
                 <DialogHeader class="flex-row items-center gap-4">
                     <div class="flex items-center gap-2">
-                        <Icon name="mdi:information-outline" size="20" />
+                        <Icon name="mdi:information-outline" size="24" />
                     </div>
                     <div>
-                        <DialogTitle>{{ title }}</DialogTitle>
-                        <DialogDescription>{{ subtitle }}</DialogDescription>
+                        <DialogTitle>{{ dialogContent.name }}</DialogTitle>
+                        <DialogDescription>{{
+                            dialogContent.id
+                        }}</DialogDescription>
                     </div>
                 </DialogHeader>
 

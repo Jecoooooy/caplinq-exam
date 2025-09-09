@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-
+@source './tailwindcss-safelist';
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -40,6 +40,13 @@
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-ring: var(--sidebar-ring);
+
+    --color-info: var(--info);
+    --color-info-foreground: var(--info-foreground);
+    --color-success: var(--success);
+    --color-success-foreground: var(--success-foreground);
+    --color-warning: var(--warning);
+    --color-warning-foreground: var(--warning-foreground);
 }
 
 :root {
@@ -47,14 +54,14 @@
     --card-foreground: oklch(0.141 0.005 285.823);
     --popover: oklch(1 0 0);
     --popover-foreground: oklch(0.141 0.005 285.823);
-    --primary: oklch(0.6443 0.1814 254.73 / 98.82%);
+    --primary: oklch(0.4005 0.044 269.05);
     --primary-foreground: oklch(0.985 0 0);
     --secondary: oklch(0.967 0.001 286.375);
     --secondary-foreground: oklch(0.21 0.006 285.885);
     --muted: oklch(0.967 0.001 286.375);
     --muted-foreground: oklch(0.5651 0.0052 258.34);
-    --accent: oklch(0.967 0.001 286.375);
-    --accent-foreground: oklch(0.21 0.006 285.885);
+    --accent: oklch(0.6443 0.1814 254.73 / 98.82%);
+    --accent-foreground: oklch(0.985 0 0);
     --destructive: oklch(0.577 0.245 27.325);
     --destructive-foreground: oklch(1 0 0);
     --info: oklch(70% 0.1583 253.63deg);
@@ -125,5 +132,48 @@
     }
     body {
         @apply bg-background text-foreground;
+    }
+    @keyframes open-dialog {
+        from {
+            height: var(--item-height, 0);
+            width: var(--item-width, 0);
+            top: var(--item-top, 0);
+            left: var(--item-left, 0);
+            border-radius: 16px;
+        }
+
+        to {
+            height: 100svh;
+            width: 100svw;
+            top: 0;
+            left: 0;
+            border-radius: 0;
+        }
+    }
+
+    .open-dialog {
+        animation: open-dialog 0.3s ease-in-out 0s 1 forwards;
+    }
+
+    @keyframes close-dialog {
+        from {
+            height: var(--item-height, 0);
+            width: var(--item-width, 0);
+            top: var(--item-top, 0);
+            left: var(--item-left, 0);
+            border-radius: 16px;
+        }
+
+        to {
+            height: 100svh;
+            width: 100svw;
+            top: 0;
+            left: 0;
+            border-radius: 0;
+        }
+    }
+
+    .close-dialog {
+        animation: close-dialog 0.3s ease-in-out 0s 1 reverse forwards;
     }
 }

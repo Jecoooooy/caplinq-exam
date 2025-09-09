@@ -1,0 +1,11 @@
+bg-primary text-primary text-primary-foreground bg-primary/10 bg-primary/40 border-primary/40 border-primary/60 hover:border-primary
+bg-secondary text-secondary text-secondary-foreground bg-secondary/10 bg-secondary/40 border-secondary/40 border-secondary/60 hover:border-secondary
+bg-destructive text-destructive text-destructive-foreground bg-destructive/10 bg-destructive/40 border-destructive/40 border-destructive/60 hover:border-destructive
+bg-accent text-accent text-accent-foreground bg-accent/10 bg-accent/40 border-accent/40 border-accent/60 hover:border-accent
+bg-error text-error text-error-foreground bg-error/10 bg-error/40 border-error/40 border-error/60 hover:border-error
+bg-warning text-warning text-warning-foreground bg-warning/10 bg-warning/40 border-warning/40 border-warning/60 hover:border-warning
+bg-info text-info text-info-foreground bg-info/10 bg-info/40 border-info/40 border-info/60 hover:border-info
+bg-success text-success text-success-foreground bg-success/10 bg-success/40 border-success/40 border-success/60 hover:border-success
+bg-card text-card text-card-foreground bg-card/10 bg-card/40 border-card/40 border-card/60 hover:border-card
+bg-muted text-muted text-muted-foreground bg-muted/10 bg-muted/40 border-muted/40 border-muted/60 hover:border-muted
+bg-popover text-popover text-popover-foreground bg-popover/10 bg-popover/40 border-popover/40 border-popover/60 hover:border-popover

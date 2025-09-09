@@ -1,36 +1,126 @@
 import type { VariantProps } from "class-variance-authority";
 import { cva } from "class-variance-authority";
-
+import { cn } from "@/lib/utils";
 export { default as Button } from "./Button.vue";
 
-export const buttonVariants = cva(
-    "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
-    {
-        variants: {
-            variant: {
-                default:
-                    "bg-primary text-primary-foreground shadow-xs hover:bg-primary/90",
-                destructive:
-                    "bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
-                outline:
-                    "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
-                secondary:
-                    "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
-                ghost: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
-                link: "text-primary underline-offset-4 hover:underline",
-            },
-            size: {
-                default: "h-9 px-4 py-2 has-[>svg]:px-3",
-                sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
-                lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
-                icon: "size-9",
+type RemoveAutoVariant<T extends { variant?: string }> = Omit<T, "variant"> & {
+    variant?: Exclude<T["variant"], "auto">;
+};
+
+type Props = {
+    variant?:
+        | "default"
+        | "destructive"
+        | "outline"
+        | "tonal"
+        | "secondary"
+        | "ghost"
+        | "link"
+        | "auto";
+    size?:
+        | "default"
+        | "sm"
+        | "lg"
+        | "icon-xs"
+        | "icon-sm"
+        | "icon-md"
+        | "icon-lg";
+    elevation?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+    icon?: boolean | "sm" | "md" | "lg";
+    color?:
+        | "primary"
+        | "secondary"
+        | "destructive"
+        | "error"
+        | "warning"
+        | "info"
+        | "success"
+        | "accent"
+        | "card"
+        | "muted"
+        | "popover";
+};
+
+export const buttonVariants = (baseProps: Props) => {
+    const props: RemoveAutoVariant<Props> & { isAutoVariant: boolean } = {
+        ...baseProps,
+        isAutoVariant: baseProps.variant === "auto",
+        variant: baseProps.variant === "auto" ? undefined : baseProps.variant,
+    };
+
+    const variants = {
+        variant: {
+            default: "bg-primary text-primary-foreground hover:brightness-110",
+            destructive:
+                "bg-destructive text-destructive-foreground hover:brightness-110",
+            outline: "border backdrop-blur bg-transparent",
+            tonal: "backdrop-blur-md hover:brightness-110",
+            secondary:
+                "bg-secondary text-secondary-foreground hover:brightness-110",
+            ghost: "hover:brightness-110",
+            link: " hover:brightness-110 underline-offset-4 decoration-2 hover:underline",
+        },
+        size: {
+            default: "h-10 px-4 py-2",
+            sm: "h-9 rounded-md px-3",
+            lg: "h-11 rounded-md px-8",
+            "icon-xs": "size-8",
+            "icon-sm": "size-9",
+            "icon-md": "size-10",
+            "icon-lg": "size-11",
+        },
+        elevation: {
+            0: "shadow-none ",
+            1: "shadow-sm active:shadow-sm hover:shadow-md dark:border-accent/20 dark:border dark:shadow-accent/20 ",
+            2: "shadow-md active:shadow-md hover:shadow-lg dark:border-accent/20 dark:border dark:shadow-accent/20",
+            3: "shadow-lg active:shadow-lg hover:shadow-xl dark:border-accent/20 dark:border dark:shadow-accent/20",
+            4: "shadow-xl active:shadow-xl hover:shadow-2xl dark:border-accent/20 dark:border dark:shadow-accent/20",
+            5: "shadow-[0px_2px_4px_rgba(255,255,255,0.7)_inset,_0px_2px_2px_rgba(0,0,0,0.5)] active:shadow-[0px_4px_6px_rgba(0,0,0,1)_inset]",
+            6: "shadow-[0px_2px_4px_rgba(0,0,0,0.7)_inset] dark:shadow-[0px_4px_6px_rgba(0,0,0,1)_inset]",
+        },
+    };
+
+    const color = props.color || "primary";
+    Object.entries(variants.variant).forEach(([key, value]) => {
+        variants.variant[key as keyof typeof variants.variant] = cn(
+            value,
+            key === "tonal" &&
+                `text-${color} bg-${color}/10 dark:bg-${color}/40`,
+            ["ghost", "link"].includes(key) && `text-${color}`,
+            key === "outline" &&
+                `text-${color} border-${color}/40 dark:border-${color}/60 hover:border-${color}`,
+            key === "default" && `text-${color}-foreground bg-${color}`,
+        );
+    });
+    const computedDefaultVariant = props.isAutoVariant ? "outline" : "default";
+    function computeIconSize(): "icon-sm" | "icon-md" | "icon-lg" {
+        const base: "sm" | "md" | "lg" = isBoolean(props.icon)
+            ? "md"
+            : (props.icon ?? "md");
+        if (base === "sm") return "icon-sm";
+        if (base === "lg") return "icon-lg";
+        return "icon-md";
+    }
+    const computedDefaultSize:
+        | "default"
+        | "sm"
+        | "lg"
+        | "icon-xs"
+        | "icon-sm"
+        | "icon-md"
+        | "icon-lg" = props.icon ? computeIconSize() : "default";
+
+    return cva(
+        "inline-flex cursor-pointer relative items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-25",
+        {
+            variants,
+            defaultVariants: {
+                variant: computedDefaultVariant,
+                size: computedDefaultSize,
+                elevation: 0,
             },
         },
-        defaultVariants: {
-            variant: "default",
-            size: "default",
-        },
-    },
-);
+    )(props);
+};
 
 export type ButtonVariants = VariantProps<typeof buttonVariants>;

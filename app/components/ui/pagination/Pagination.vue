@@ -56,7 +56,10 @@ const visiblePages = computed(() => {
             <span
                 class="mr-2 inline-block h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent"
             ></span>
-            <span role="status" aria-live="polite"> fetching data ... </span>
+            <span role="status" aria-live="polite">
+                fetching data ...
+                <span class="max-md:hidden">(intentional delay applied)</span>
+            </span>
         </div>
     </template>
     <template v-else-if="props.error">

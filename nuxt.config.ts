@@ -9,12 +9,26 @@ export default defineNuxtConfig({
         plugins: [tailwindcss()],
     },
 
-    modules: ["@nuxt/fonts", "@nuxt/icon", "shadcn-nuxt"],
+    modules: [
+        "@nuxt/fonts",
+        "@nuxt/icon",
+        "shadcn-nuxt",
+        "@nuxtjs/device",
+        "@vueuse/nuxt",
+    ],
     shadcn: {
         prefix: "",
         componentDir: "./app/components/ui",
     },
-
+    typescript: {
+        strict: true,
+        typeCheck: false,
+        tsConfig: {
+            compilerOptions: {
+                allowImportingTsExtensions: true,
+            },
+        },
+    },
     nitro: {
         storage: {
             data: {

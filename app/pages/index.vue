@@ -45,11 +45,5 @@ const {
     pending: productsPending,
     error: productsError,
 } = await useFetch("/api/products");
-console.log(productsError);
 const allProducts = computed(() => products.value?.data ?? []);
-const {
-    data: suppliers,
-    pending: suppliersPending,
-    error: suppliersError,
-} = await useFetch("/api/suppliers");
 </script>

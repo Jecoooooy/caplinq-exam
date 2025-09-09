@@ -1,5 +1,7 @@
 export default function useEnhancedScrollbar(
     element: MaybeRef<HTMLElement | null> | string,
+    overflow: "auto" | "scroll" = "auto",
+    orientation: "x" | "y" | "auto" = "auto",
 ) {
     if (!element) return;
     let unwatch: Maybe<AnyFunction>;
@@ -9,14 +11,21 @@ export default function useEnhancedScrollbar(
         if (!target) return;
         const root = document.body;
         const primaryColor = getComputedStyle(root)
-            .getPropertyValue("--backround")
+            .getPropertyValue("--foreground")
             .trim();
         const [l = "0", c = "0", h = "100"] = primaryColor.match(
             /\d+(\.\d+)?/g,
         ) ?? ["0", "0", "100"];
 
         target.classList.add("scroll-style");
-        target.style.overflow = "auto";
+        if (orientation === "auto") {
+            target.style.overflow = overflow;
+        } else if (orientation === "y") {
+            target.style.overflowY = overflow;
+        } else {
+            target.style.overflowX = overflow;
+        }
+
         target.style.setProperty(
             "--scrollbar-thumb-bg",
             `oklch(${l} ${c} ${h})`,
@@ -25,28 +34,28 @@ export default function useEnhancedScrollbar(
         const stylesheet = document.createElement("style");
         stylesheet.textContent = `
 		${target.tagName.toLowerCase()}.scroll-style::-webkit-scrollbar {
-		width: 16px;
-		height: 16px;
+		width: 8px;
+		height: 8px;
 		}
 
 		${target.tagName.toLowerCase()}.scroll-style::-webkit-scrollbar-track {
-		background-color: transparent;
+		background-color: oklch(${l} ${c} ${h} / 10%);
+        border-radius: 12px;
 		}
 
 		${target.tagName.toLowerCase()}.scroll-style::-webkit-scrollbar-thumb {
 		border-radius: 12px;
 		background-color: var(--scrollbar-thumb-bg);
-		border: 4px solid transparent;
-		background-clip: padding-box;
+		
 		cursor: grab;
 		}
 
 		${target.tagName.toLowerCase()}.scroll-style::-webkit-scrollbar-thumb:hover {
-		background-color: oklch(${l} ${c} ${h} / 50%);
+		background-color: oklch(${l} ${c} ${h} / 100%);
 		}
 
 		${target.tagName.toLowerCase()}.scroll-style::-webkit-scrollbar-thumb:active {
-		background-color: oklch(${l} ${c} ${h} / 70%);
+		background-color: oklch(${l} ${c} ${h} / 100%);
 		cursor: grabbing;
 		}
 
@@ -75,7 +84,7 @@ export default function useEnhancedScrollbar(
             () =>
                 target.style.setProperty(
                     "--scrollbar-thumb-bg",
-                    `oklch(${l} ${c} ${h} / 10%)`,
+                    `oklch(${l} ${c} ${h} / 50%)`,
                 ),
             1000,
         );
@@ -84,7 +93,7 @@ export default function useEnhancedScrollbar(
             scrolling &&
                 target.style.setProperty(
                     "--scrollbar-thumb-bg",
-                    `oklch(${l} ${c} ${h} / 50%)`,
+                    `oklch(${l} ${c} ${h} / 100%)`,
                 );
             scrolling ? stop() : start();
         });

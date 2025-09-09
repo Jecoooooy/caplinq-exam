@@ -9,7 +9,7 @@ export default function useEnhancedScrollbar(
         if (!target) return;
         const root = document.body;
         const primaryColor = getComputedStyle(root)
-            .getPropertyValue("--primary")
+            .getPropertyValue("--backround")
             .trim();
         const [l = "0", c = "0", h = "100"] = primaryColor.match(
             /\d+(\.\d+)?/g,

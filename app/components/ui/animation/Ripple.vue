@@ -1,62 +1,65 @@
 <template>
-	<div class="absolute inset-0 overflow-hidden" style="border-radius: inherit">
-		<span
-			v-for="item in ripples"
-			:key="item.id"
-			class="absolute z-50 rounded-full bg-black/50 dark:bg-white/50"
-			:style="{
-				top: `${item.y}px`,
-				left: `${item.x}px`,
-				width: `${item.size}px`,
-				height: `${item.size}px`,
-				transform: 'scale(0.5)',
-			}"
-			@animationend="removeRipple(item.id)"
-		/>
-	</div>
+    <div
+        class="ripple absolute inset-0 overflow-hidden"
+        style="border-radius: inherit"
+    >
+        <span
+            v-for="item in ripples"
+            :key="item.id"
+            class="absolute z-50 rounded-full bg-black/50 dark:bg-white/50"
+            :style="{
+                top: `${item.y}px`,
+                left: `${item.x}px`,
+                width: `${item.size}px`,
+                height: `${item.size}px`,
+                transform: 'scale(0.5)',
+            }"
+            @animationend="removeRipple(item.id)"
+        />
+    </div>
 </template>
 <script lang="ts" setup>
 interface Ripple {
-	id: number
-	x: number
-	y: number
-	size: number
+    id: number;
+    x: number;
+    y: number;
+    size: number;
 }
 
-const ripples = ref<Ripple[]>([])
+const ripples = ref<Ripple[]>([]);
 
 const startRipple = (event: MouseEvent): void => {
-	const button = event.currentTarget as HTMLButtonElement
-	const rect = button.getBoundingClientRect()
-	const size = Math.max(rect.width, rect.height)
-	const x = event.clientX - rect.left - size / 2
-	const y = event.clientY - rect.top - size / 2
+    const button = event.currentTarget as HTMLElement;
+    const rect = button.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = event.clientX - rect.left - size / 2;
+    const y = event.clientY - rect.top - size / 2;
 
-	const newRipple: Ripple = { id: Date.now(), x, y, size }
-	ripples.value.push(newRipple)
-}
+    const newRipple: Ripple = { id: Date.now(), x, y, size };
+    ripples.value.push(newRipple);
+};
 
 const removeRipple = (id: number): void => {
-	ripples.value = ripples.value.filter((r) => r.id !== id)
-}
+    ripples.value = ripples.value.filter((r) => r.id !== id);
+};
 
-defineExpose({ startRipple })
+defineExpose({ startRipple });
 </script>
 <style lang="scss" scoped>
 @keyframes ripple {
-	from {
-		transform: scale(0.5);
-		opacity: 1;
-	}
+    from {
+        transform: scale(0.5);
+        opacity: 1;
+    }
 
-	to {
-		transform: scale(2.3);
-		opacity: 0;
-	}
+    to {
+        transform: scale(2.3);
+        opacity: 0;
+    }
 }
 
-button span {
-	position: absolute;
-	animation: ripple 0.4s linear;
+.ripple span {
+    position: absolute;
+    animation: ripple 0.4s linear;
 }
 </style>

@@ -46,10 +46,16 @@
     </section>
 </template>
 <script lang="ts" setup>
-const productStore = useProduct();
-const allProducts = computed(() => productStore.products?.data ?? []);
+import type { PaginatedResponse, Product } from "@/types/product";
 
-await productStore.getProductPaginate();
+const products = ref<PaginatedResponse<Product> | null>(null);
+
+const { data, error } =
+    await useFetch<PaginatedResponse<Product>>("/api/products");
+products.value = data.value ?? null;
+
+const allProducts = computed(() => products?.value?.data ?? []);
+
 const productsPending = ref(true);
 onMounted(() =>
     setTimeout(() => {

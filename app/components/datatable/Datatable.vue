@@ -1,18 +1,9 @@
 <template>
-    <section
-        class="flex h-full grow flex-col gap-4"
-        role="region"
-        :aria-labelledby="uniqueId"
-    >
+    <section class="flex h-full grow flex-col gap-4" role="region" :aria-labelledby="uniqueId">
         <!-- Title and Subtitle -->
-        <header
-            class="flex justify-center pb-2 gap-4 max-md:flex-col md:items-center"
-        >
+        <header class="flex justify-center pb-2 gap-4 max-md:flex-col md:items-center">
             <hgroup>
-                <h2
-                    :id="uniqueId"
-                    class="tracking-wide text-xl text-muted-foreground"
-                >
+                <h2 :id="uniqueId" class="tracking-wide text-xl text-muted-foreground">
                     {{ title }}
                 </h2>
                 <p v-if="subtitle" class="text-muted-foreground">
@@ -33,17 +24,13 @@
             <TableCaption v-if="title" class="sr-only">
                 {{ title }}
             </TableCaption>
-            <TableHeader
-                class="sticky top-0 z-20 shadow-[0_4px_4px_rgba(0,0,0,0.3)]"
-            >
+            <TableHeader class="sticky top-0 z-20 shadow-[0_4px_4px_rgba(0,0,0,0.3)]">
                 <TableRow>
                     <TableHead
                         v-for="col in columns"
                         :key="col.value"
                         :style="col.width ? { width: col.width } : {}"
-                        :class="
-                            cn('even:bg-muted odd:bg-background', col.class)
-                        "
+                        :class="cn('even:bg-muted odd:bg-background', col.class)"
                         :rowspan="col.rowspan"
                     >
                         {{ col.text }}
@@ -70,61 +57,34 @@
                     </TableRow>
                 </template>
                 <TableRow v-else-if="error">
-                    <TableCell
-                        role="alert"
-                        aria-live="assertive"
-                        :colspan="columns.length"
-                        class="py-12 text-center"
-                    >
+                    <TableCell role="alert" aria-live="assertive" :colspan="columns.length" class="py-12 text-center">
                         <div class="flex flex-col items-center gap-3">
                             <div class="text-destructive">
                                 <Icon name="mdi:alert-circle" size="48" />
                             </div>
                             <div class="text-center">
-                                <h3 class="text-foreground text-lg font-medium">
-                                    Error Loading Data
-                                </h3>
+                                <h3 class="text-foreground text-lg font-medium">Error Loading Data</h3>
                                 <p class="text-muted-foreground mt-1 text-sm">
                                     {{ error }}
                                 </p>
                             </div>
-                            <Button
-                                variant="outline"
-                                size="sm"
-                                @click="$emit('retry')"
-                            >
-                                <Icon
-                                    name="mdi:refresh"
-                                    class="mr-2"
-                                    size="16"
-                                />
+                            <Button variant="outline" size="sm" @click="$emit('retry')">
+                                <Icon name="mdi:refresh" class="mr-2" size="16" />
                                 refresh
                             </Button>
                         </div>
                     </TableCell>
                 </TableRow>
-                <TableRow
-                    v-else-if="paginatedItems.length === 0"
-                    class="h-full"
-                >
-                    <TableCell
-                        :colspan="columns.length"
-                        class="py-12 text-center"
-                    >
+                <TableRow v-else-if="paginatedItems.length === 0" class="h-full">
+                    <TableCell :colspan="columns.length" class="py-12 text-center">
                         <div class="flex flex-col items-center gap-3">
                             <div class="text-muted-foreground">
                                 <Icon name="mdi:database-outline" size="48" />
                             </div>
                             <div class="text-center">
-                                <h3 class="text-foreground text-lg font-medium">
-                                    Oops!
-                                </h3>
+                                <h3 class="text-foreground text-lg font-medium">Oops!</h3>
                                 <p class="text-muted-foreground mt-1 text-sm">
-                                    {{
-                                        search
-                                            ? "No Matched Data"
-                                            : "No Data Available"
-                                    }}
+                                    {{ search ? "No Matched Data" : "No Data Available" }}
                                 </p>
                             </div>
                         </div>
@@ -154,20 +114,8 @@
                                 class="animate-fade h-10 truncate overflow-hidden whitespace-nowrap"
                                 :class="cn('even:bg-muted', col.class)"
                             >
-                                <template
-                                    v-if="
-                                        typeof col.badge === 'object' &&
-                                        col.badge !== null
-                                    "
-                                >
-                                    <Badge
-                                        :variant="
-                                            getBadgeVariant(
-                                                col.badge,
-                                                row[col.value],
-                                            )
-                                        "
-                                    >
+                                <template v-if="typeof col.badge === 'object' && col.badge !== null">
+                                    <Badge :variant="getBadgeVariant(col.badge, row[col.value])">
                                         {{ row[col.value] }}
                                     </Badge>
                                 </template>
@@ -202,9 +150,7 @@
                     </div>
                     <div>
                         <DialogTitle>{{ dialogContent.name }}</DialogTitle>
-                        <DialogDescription>{{
-                            dialogContent.id
-                        }}</DialogDescription>
+                        <DialogDescription>{{ dialogContent.id }}</DialogDescription>
                     </div>
                 </DialogHeader>
 
@@ -308,9 +254,7 @@ const filteredItems = computed(() => {
     );
 });
 
-const totalPages = computed(() =>
-    Math.max(1, Math.ceil(filteredItems.value.length / pageSize)),
-);
+const totalPages = computed(() => Math.max(1, Math.ceil(filteredItems.value.length / pageSize)));
 const startIndex = computed(() => (currentPage.value - 1) * pageSize);
 const paginatedItems = computed(() => {
     const start = startIndex.value;
@@ -330,15 +274,9 @@ function getBadgeVariant(
     return undefined;
 }
 
-function getTooltipContent(
-    val: unknown,
-): string | Record<string, unknown> | undefined {
+function getTooltipContent(val: unknown): string | Record<string, unknown> | undefined {
     if (typeof val === "string") return val;
-    if (
-        isObject(val) &&
-        Object.getPrototypeOf(val) === Object.prototype &&
-        Object.keys(val).length > 0
-    ) {
+    if (isObject(val) && Object.getPrototypeOf(val) === Object.prototype && Object.keys(val).length > 0) {
         return val;
     }
     return undefined;

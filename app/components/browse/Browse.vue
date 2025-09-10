@@ -15,7 +15,7 @@
             class="fixed z-50 h-svh content-center overflow-hidden overscroll-none backdrop-blur"
         >
             <section class="max-w-2xl px-4 md:px-8 mx-auto">
-                <Card class="relative overflow-hidden gap-8"
+                <Card class="relative overflow-hidden py-5 gap-0"
                     ><Button
                         class="absolute right-2 top-2 animate-fade animate-delay-500"
                         variant="ghost"
@@ -25,16 +25,16 @@
                     >
                         <Icon name="mdi:close"></Icon>
                     </Button>
-                    <CardHeader
+                    <CardHeader class="h-7 flex items-end justify-center"
                         ><CardTitle
                             class="text-center font-normal text-muted-foreground"
-                            >Browse</CardTitle
+                            >{{ toTitleCase(title) }}</CardTitle
                         ></CardHeader
                     >
-                    <CardContent class="px-0"
-                        ><BrowseDropdown></BrowseDropdown>
+                    <CardContent class="px-0 pt-10"
+                        ><BrowseDropdown :is-open="dialog"></BrowseDropdown>
                     </CardContent>
-                    <CardFooter class="gap-4">
+                    <CardFooter class="gap-4 pt-6 border-t">
                         <Button variant="outline">Products Selected</Button>
                         <div class="grow"></div>
                         <Button variant="outline">Cancel</Button>
@@ -78,4 +78,6 @@ function toggleDialog() {
         }
     }
 }
+
+const title = ref("Browse");
 </script>

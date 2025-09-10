@@ -2,6 +2,7 @@
     <article class="flex-col flex gap-6">
         <div class="px-10 border-b pb-6">
             <Input
+                v-model="search"
                 class="h-10.5"
                 placeholder="Search Supplier"
                 :icon="{ name: 'magnify', position: 'left' }"
@@ -13,7 +14,10 @@
             class="pl-10 pr-3 w-[calc(100%-16px)] max-h-60 scroll-py-1 overflow-x-hidden"
         >
             <ul class="p-0 flex flex-col" ref="list">
-                <template v-for="(item, index) in allSuppliers" :key="item.id">
+                <template
+                    v-for="(item, index) in filteredSuppliers"
+                    :key="item.id"
+                >
                     <li
                         :value="item.id"
                         tabindex="-1"
@@ -38,6 +42,14 @@ const props = defineProps<{ isOpen: boolean }>();
 
 const { suppliers } = useSupplier();
 const allSuppliers = computed(() => suppliers ?? []);
+
+const search = ref("");
+const filteredSuppliers = computed(() => {
+    const query = search.value.trim().toLowerCase();
+    const list = allSuppliers.value;
+    if (!query) return list;
+    return list.filter((s) => s.name.toLowerCase().includes(query));
+});
 
 const container: Ref<HTMLElement | null> = ref(null);
 useEnhancedScrollbar(container, "scroll", "y");

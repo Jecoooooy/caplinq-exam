@@ -10,12 +10,8 @@ export default function useEnhancedScrollbar(
     const updateScrollbar = (target?: HTMLElement) => {
         if (!target) return;
         const root = document.body;
-        const primaryColor = getComputedStyle(root)
-            .getPropertyValue("--foreground")
-            .trim();
-        const [l = "0", c = "0", h = "100"] = primaryColor.match(
-            /\d+(\.\d+)?/g,
-        ) ?? ["0", "0", "100"];
+        const primaryColor = getComputedStyle(root).getPropertyValue("--primary").trim();
+        const [l = "0", c = "0", h = "100"] = primaryColor.match(/\d+(\.\d+)?/g) ?? ["0", "0", "100"];
 
         target.classList.add("scroll-style");
         if (orientation === "auto") {
@@ -26,10 +22,7 @@ export default function useEnhancedScrollbar(
             target.style.overflowX = overflow;
         }
 
-        target.style.setProperty(
-            "--scrollbar-thumb-bg",
-            `oklch(${l} ${c} ${h})`,
-        );
+        target.style.setProperty("--scrollbar-thumb-bg", `oklch(${l} ${c} ${h})`);
 
         const stylesheet = document.createElement("style");
         stylesheet.textContent = `
@@ -70,9 +63,7 @@ export default function useEnhancedScrollbar(
 			border: 2px solid transparent;
 			}
 		}`;
-        const existingStylesheet = target.querySelector(
-            "style[data-enhanced-scrollbar]",
-        );
+        const existingStylesheet = target.querySelector("style[data-enhanced-scrollbar]");
         if (existingStylesheet) {
             existingStylesheet.remove();
         }
@@ -81,20 +72,12 @@ export default function useEnhancedScrollbar(
 
         const { isScrolling } = useScroll(target);
         const { start, stop } = useTimeoutFn(
-            () =>
-                target.style.setProperty(
-                    "--scrollbar-thumb-bg",
-                    `oklch(${l} ${c} ${h} / 50%)`,
-                ),
+            () => target.style.setProperty("--scrollbar-thumb-bg", `oklch(${l} ${c} ${h} / 50%)`),
             1000,
         );
         stopTimeout = stop;
         unwatch = watch(isScrolling, (scrolling) => {
-            scrolling &&
-                target.style.setProperty(
-                    "--scrollbar-thumb-bg",
-                    `oklch(${l} ${c} ${h} / 100%)`,
-                );
+            scrolling && target.style.setProperty("--scrollbar-thumb-bg", `oklch(${l} ${c} ${h} / 100%)`);
             scrolling ? stop() : start();
         });
     };
@@ -104,9 +87,7 @@ export default function useEnhancedScrollbar(
         stopTimeout?.();
 
         if (el) {
-            const stylesheet = el.querySelector(
-                "style[data-enhanced-scrollbar]",
-            );
+            const stylesheet = el.querySelector("style[data-enhanced-scrollbar]");
             stylesheet?.remove();
             el.classList.remove("scroll-style");
         }

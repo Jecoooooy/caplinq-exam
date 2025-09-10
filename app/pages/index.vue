@@ -49,11 +49,8 @@
 import type { PaginatedResponse, Product } from "@/types/product";
 
 const products = ref<PaginatedResponse<Product> | null>(null);
-
-const { data, error } =
-    await useFetch<PaginatedResponse<Product>>("/api/products");
+const { data, error } = await useFetch<PaginatedResponse<Product>>("/api/products");
 products.value = data.value ?? null;
-
 const allProducts = computed(() => products?.value?.data ?? []);
 
 const productsPending = ref(true);

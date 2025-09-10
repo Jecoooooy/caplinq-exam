@@ -11,22 +11,22 @@
 
         <section
             ref="container"
-            class="pl-10 pr-3 w-[calc(100%-16px)] max-h-60 scroll-py-1 overflow-x-hidden"
+            class="pl-10 pr-3 w-[calc(100%-16px)] h-60 scroll-py-1 overflow-x-hidden"
         >
             <ul class="p-0 flex flex-col" ref="list">
                 <template
-                    v-for="(item, index) in filteredSuppliers"
-                    :key="item.id"
+                    v-for="(supplier, index) in filteredSuppliers"
+                    :key="supplier.id"
                 >
                     <li
-                        :value="item.id"
+                        :value="supplier.id"
                         tabindex="-1"
-                        class="hover:bg-accent relative h-10 hover:text-accent-foreground text-sm px-4 focus:bg-accent/20 flex justify-between items-center"
+                        class="hover:bg-accent relative focus-within:outline-none h-10 hover:text-accent-foreground text-sm px-4 focus:bg-accent/20 flex justify-between items-center"
                         @keydown="handleKeyDown($event, index)"
-                        @click="expandList($event, index)"
+                        @click="expandList($event, index, supplier)"
                     >
                         <AnimationRipple ref="rippleRef" />
-                        {{ item.name }}
+                        {{ supplier.name }}
                         <Icon name="mdi:chevron-right" size="20" />
                     </li>
                     <Separator />
@@ -37,7 +37,7 @@
 </template>
 <script lang="ts" setup>
 import type Ripple from "~/components/ui/animation/Ripple.vue";
-
+import type { Supplier } from "@/types/supplier";
 const props = defineProps<{ isOpen: boolean }>();
 
 const { suppliers } = useSupplier();
@@ -67,8 +67,10 @@ watch(
 );
 
 const rippleRef = ref<InstanceType<typeof Ripple>[]>([]);
+const activeSupplier = inject<Ref<Supplier | null> | null>("supplier", null);
 
-function expandList(event: MouseEvent, index: number) {
+function expandList(event: MouseEvent, index: number, supplier: Supplier) {
     rippleRef.value[index]?.startRipple(event);
+    activeSupplier && (activeSupplier.value = supplier);
 }
 </script>

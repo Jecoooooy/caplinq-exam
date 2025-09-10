@@ -60,8 +60,8 @@ export const buttonVariants = (baseProps: Props) => {
             link: " hover:brightness-110 underline-offset-4 decoration-2 hover:underline",
         },
         size: {
-            default: "h-10 px-4 py-2",
-            sm: "h-9 rounded-xs px-3",
+            default: "h-10 px-6 py-2",
+            sm: "h-9 rounded-xs  px-4",
             lg: "h-11 rounded-xs px-8",
             "icon-xs": "size-8",
             "icon-sm": "size-9",

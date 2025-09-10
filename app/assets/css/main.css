@@ -1,5 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "tailwindcss-animated";
+
 @source './tailwindcss-safelist';
 @custom-variant dark (&:is(.dark *));
 
@@ -72,7 +74,7 @@
     --success: oklch(73% 0.2112 147.9683deg);
     --success-foreground: oklch(98% 0.0181 155.83deg);
     --border: oklch(0.92 0.004 286.32);
-    --input: oklch(0.92 0.004 286.32);
+    --input: oklch(0.8203 0 0);
     --ring: oklch(0.705 0.015 286.067);
     --chart-1: oklch(0.646 0.222 41.116);
     --chart-2: oklch(0.6 0.118 184.704);
@@ -134,6 +136,16 @@
     body {
         @apply bg-background text-foreground;
     }
+
+    .scrollbar-none::-webkit-scrollbar {
+        display: none;
+    }
+
+    .scrollbar-none {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
+
     @keyframes open-dialog {
         from {
             height: var(--item-height, 0);

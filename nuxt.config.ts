@@ -17,10 +17,7 @@ export default defineNuxtConfig({
         "@vueuse/nuxt",
         ["@pinia/nuxt", { autoImports: ["defineStore", "acceptHMRUpdate"] }],
     ],
-    pinia: {
-        storesDirs: ["./app/store/**"],
-    },
-    imports: { dirs: ["./app/store"] },
+    imports: { dirs: ["./app/stores"] },
     shadcn: {
         prefix: "",
         componentDir: "./app/components/ui",

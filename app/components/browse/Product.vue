@@ -6,7 +6,8 @@
                     :index="index"
                     @click="toggleExpanded(product.id)"
                     :class="{
-                        'bg-muted focus:bg-muted': expandedProducts.has(product.id) && product.childProducts.length > 0,
+                        'bg-muted focus:bg-muted':
+                            hasSelectedChildProducts(product.id) && product.childProducts.length > 0,
                     }"
                 >
                     <Avatar class="!rounded-xs size-12.5 border">
@@ -23,7 +24,10 @@
                     </div>
                 </BrowseList>
                 <BrowseChildProduct
-                    v-if="expandedProducts.has(product.id) && product.childProducts.length > 0"
+                    v-if="
+                        (expandedProducts.has(product.id) || hasSelectedChildProducts(product.id)) &&
+                        product.childProducts.length > 0
+                    "
                     :child-products="product.childProducts"
                 />
                 <Separator />
@@ -39,11 +43,13 @@ const props = defineProps<{
 }>();
 
 const productStore = useProduct();
-const { products } = storeToRefs(productStore);
 await productStore.getProductsBySupplierId(props.supplierId);
+const allSupplierProducts = computed(() => productStore.products ?? []);
 
 const search = defineModel<string>("search", { default: "" });
-const { filtered: filteredProducts } = useFilteredList(products, search, "name");
+const { filtered: filteredProducts } = useFilteredList(allSupplierProducts, search, "name");
+
+const { selectedProducts } = useSelectedProduct();
 
 const expandedProducts = ref(new Set<string>());
 const toggleExpanded = (productId: string) => {
@@ -52,6 +58,15 @@ const toggleExpanded = (productId: string) => {
     } else {
         expandedProducts.value.add(productId);
     }
+};
+
+const hasSelectedChildProducts = (productId: string) => {
+    const product = allSupplierProducts.value.find((p) => p.id === productId);
+    if (!product) return false;
+
+    return product.childProducts.some((childProduct) =>
+        selectedProducts.some((selected) => selected.id === childProduct.id),
+    );
 };
 
 const container: Ref<HTMLElement | null> = ref(null);

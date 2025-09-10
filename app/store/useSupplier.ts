@@ -2,6 +2,7 @@ import type { Supplier } from "@/types/supplier";
 
 export const useSupplier = defineStore("supplier", () => {
     const suppliers = ref<Supplier[]>([]);
+    const activeSupplier = ref<Supplier | null>(null);
     const suppliersPending = ref(false);
     const suppliersError = ref<unknown>(null);
 
@@ -19,6 +20,7 @@ export const useSupplier = defineStore("supplier", () => {
 
     return {
         suppliers,
+        activeSupplier,
         suppliersPending,
         suppliersError,
         getSuppliers,

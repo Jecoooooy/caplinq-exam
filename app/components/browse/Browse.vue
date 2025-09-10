@@ -31,10 +31,10 @@
                             >{{ toTitleCase(title) }}</CardTitle
                         ></CardHeader
                     >
-                    <CardContent class="px-0 pt-10"
+                    <CardContent class="px-0 pb-5 pt-10"
                         ><BrowseDropdown :is-open="dialog"></BrowseDropdown>
                     </CardContent>
-                    <CardFooter class="gap-4 pt-6 border-t">
+                    <CardFooter class="gap-4 border-t">
                         <Button variant="outline">Products Selected</Button>
                         <div class="grow"></div>
                         <Button variant="outline">Cancel</Button>
@@ -79,5 +79,5 @@ function toggleDialog() {
     }
 }
 
-const title = ref("Browse");
+const title = computed(() => supplierStore.activeSupplier?.name ?? "Browse");
 </script>

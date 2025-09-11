@@ -209,6 +209,9 @@
     li[data-sonner-toast] button {
         position: absolute;
         bottom: 24px;
+        background-color: transparent !important;
+        color: var(--foreground) !important;
+        border: 2px solid var(--border) !important;
         left: 80px;
     }
     li[data-sonner-toast] div[data-icon],

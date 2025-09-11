@@ -61,5 +61,5 @@ function deleteProduct(product: SelectedProduct) {
 }
 
 const container: Ref<HTMLElement | null> = ref(null);
-useScrollHint(container);
+useScrollHint(container, { height: "160px" });
 </script>

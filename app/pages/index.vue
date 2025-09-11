@@ -1,6 +1,6 @@
 <template>
     <section class="container h-svh py-20 mx-auto">
-        <Card class="shadow-md h-full relative">
+        <Card class="shadow-md animate-fade h-full relative">
             <Browse></Browse>
             <CardContent class="h-full md:px-16">
                 <Datatable

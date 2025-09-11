@@ -45,7 +45,7 @@ export default function useScrollHint(
             "scroll-indicator pointer-events-none select-none sticky pb-2 -bottom-1 left-0 flex w-full flex-col items-center justify-end duration-1000 transition-opacity order-last";
         scrollIndicatorBottom.innerHTML = `
 		<span class="animate-fade-up  scale-x-150 rotate-180 text-primary/80 animate-infinite">^</span>
-			${options.text ? '<span class="block animate-fade-up text-sm text-muted-foreground/50">Scroll down to see more</span>' : ""}`;
+			${options.text ? '<span class="block animate-fade-up text-sm text-muted-foreground/70">Scroll down to see more</span>' : ""}`;
         scrollIndicatorBottom.style.minHeight = options.height ?? "80px";
         scrollIndicatorBottom.style.marginTop = `-${options.height}`;
 

@@ -10,7 +10,7 @@
                 'close-dialog': closeDelay,
                 'open-dialog': isModalOpen && !closeDelay,
             }"
-            class="fixed z-40 h-svh content-center overflow-hidden overscroll-none"
+            class="fixed z-40 h-svh content-center overflow-hidden backdrop-blur-lg overscroll-none"
         >
             <section class="max-w-2xl px-4 md:px-8 mx-auto">
                 <Card class="relative overflow-hidden shadow-lg py-5 gap-0">
@@ -59,7 +59,11 @@
                                     :icon="{ name: 'magnify', position: 'left' }"
                                 />
                             </div>
-                            <BrowseSupplier v-if="isEmpty(supplier, true)" :search="search" />
+                            <BrowseSupplier
+                                v-if="isEmpty(supplier, true)"
+                                :search="search"
+                                @reset-search="search = ''"
+                            />
                             <BrowseProduct v-else :search="search" :supplier-id="supplier.id" />
                         </template>
                         <BrowseSelection v-else />

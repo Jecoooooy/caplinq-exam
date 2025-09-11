@@ -48,11 +48,11 @@ import type { ChildProduct } from "@/types/product";
 import type { SelectedProduct } from "@/stores/useSelectedProduct";
 const props = defineProps<{ childProducts: ChildProduct[] }>();
 
-const { selectedProducts, addProduct, deleteProduct, updateQuantity } = useSelectedProduct();
+const selectedProductStore = useSelectedProduct();
 
 const childProductWithQuantity = computed(() => {
     return props.childProducts.map((element: ChildProduct) => {
-        const selectedProduct = selectedProducts.find((p: SelectedProduct) => p.id === element.id);
+        const selectedProduct = selectedProductStore.selectedProducts.find((p: SelectedProduct) => p.id === element.id);
         return {
             ...element,
             quantity: selectedProduct?.quantity ?? 1,
@@ -61,15 +61,14 @@ const childProductWithQuantity = computed(() => {
 });
 
 const isChildProductSelected = (productId: string) => {
-    return selectedProducts.some((p: SelectedProduct) => p.id === productId);
+    return selectedProductStore.selectedProducts.some((p: SelectedProduct) => p.id === productId);
 };
 
 const toggleChildProduct = (childProduct: SelectedProduct) => {
     if (isChildProductSelected(childProduct.id)) {
-        deleteProduct(childProduct.id);
+        selectedProductStore.deleteProduct(childProduct.id);
     } else {
-        addProduct(childProduct);
+        selectedProductStore.addProduct(childProduct);
     }
-    console.log(selectedProducts);
 };
 </script>

@@ -75,7 +75,7 @@
                         >
                         <div class="grow"></div>
                         <Button variant="outline" @click="toggleDialog()"> Cancel </Button>
-                        <Button :disabled="selectedProductStore.count === 0">Add</Button>
+                        <Button :disabled="selectedProductStore.count === 0" @click="addToOrder()">Add</Button>
                     </CardFooter>
                 </Card>
             </section>
@@ -87,6 +87,7 @@ import type { Supplier } from "@/types/supplier";
 const selectedProductStore = useSelectedProduct();
 const supplierStore = useSupplier();
 await supplierStore.getSuppliers();
+const { showSuccessWithAction } = useNotification();
 
 const isModalOpen = ref(false);
 provide("isModalOpen", isModalOpen);
@@ -123,4 +124,14 @@ function toggleDialog() {
 }
 
 const productSelection = ref(false);
+
+function addToOrder() {
+    showSuccessWithAction("Your order has been added", {
+        label: "view",
+        onClick: () => undefined,
+    });
+    isModalOpen.value = false;
+    selectedProductStore.selectedProducts = [];
+    supplier.value = null;
+}
 </script>

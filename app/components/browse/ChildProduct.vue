@@ -6,7 +6,7 @@
                 :index="childIndex"
                 :is-arrow-visible="false"
                 :is-auto-focus="false"
-                class="px-8 animate-fade cursor-pointer focus:bg-muted"
+                class="max-md:py-2 pl-10 pr-2 md:px-8 animate-fade cursor-pointer focus:bg-muted"
                 :class="{
                     'bg-muted': !isChildProductSelected(childProduct.id),
                     '!bg-accent/20': isChildProductSelected(childProduct.id),

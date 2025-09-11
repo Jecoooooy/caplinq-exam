@@ -1,8 +1,8 @@
 <template>
-    <section class="container h-svh py-20 mx-auto">
+    <section class="container h-svh py-4 md:py-20 mx-auto">
         <Card class="shadow-md animate-fade h-full relative">
             <Browse></Browse>
-            <CardContent class="h-full md:px-16">
+            <CardContent class="h-full px-4 md:px-16">
                 <Datatable
                     title="Product Search"
                     :items="allProducts"

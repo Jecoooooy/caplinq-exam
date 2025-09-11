@@ -1,7 +1,7 @@
 <template>
     <section
         ref="container"
-        class="pl-10 pr-3 animate-fade animate-duration-300 w-[calc(100%-16px)] h-80 scroll-py-1 overflow-x-hidden"
+        class="max-md:px-0 max-md:mx-auto pl-10 pr-3 animate-fade animate-duration-300 w-[calc(100%-16px)] h-80 scroll-py-1 overflow-x-hidden"
     >
         <BrowseGroup>
             <template v-if="filteredSuppliers.length">
@@ -36,7 +36,7 @@ const search = defineModel<string>("search", { default: "" });
 const { filtered: filteredSuppliers } = useFilteredList(allSuppliers, search, "name");
 
 const container: Ref<HTMLElement | null> = ref(null);
-useEnhancedScrollbar(container, "scroll", "y");
+if (!useDevice().isMobile) useEnhancedScrollbar(container, "scroll", "y");
 
 const activeSupplier = inject<Ref<Supplier | null> | null>("supplier", null);
 

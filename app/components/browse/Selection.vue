@@ -7,7 +7,7 @@
                     :key="product.id"
                     :index="index"
                     :is-arrow-visible="false"
-                    class="px-10 group py-5 items-center gap-5"
+                    class="py-2 pl-2 pr-4 md:px-10 group md:py-5 items-center gap-5"
                 >
                     <span class="text-xs">{{ index + 1 }}</span>
                     <Avatar class="!rounded-xs size-12.5 border">
@@ -31,12 +31,14 @@
                         </NumberField>
                     </div>
                     <Icon
-                        class="opacity-0 group-hover:animate-fade-right cursor-pointer"
+                        class="md:opacity-0 group-hover:animate-fade-right cursor-pointer"
                         name="mdi:trash-outline"
                         size="20"
                         @click="deleteProduct(product)"
                     />
-                    <div class="w-[calc(100%-80px)] mx-auto absolute -bottom-0.25 bg-input h-0.5"></div>
+                    <div
+                        class="w-full max-md:left-0 md:w-[calc(100%-80px)] mx-auto absolute -bottom-0.25 bg-input h-0.5"
+                    ></div>
                 </BrowseList>
             </TransitionGroup>
         </BrowseGroup>

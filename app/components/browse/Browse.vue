@@ -1,5 +1,5 @@
 <template>
-    <div class="absolute right-16 h-fit w-fit">
+    <div class="absolute right-4 md:right-16 h-fit w-fit">
         <div ref="item">
             <Button variant="outline" :ripple="false" size="sm" @click="toggleDialog()"> browse </Button>
         </div>
@@ -68,15 +68,15 @@
                         </template>
                         <BrowseSelection v-else />
                     </CardContent>
-                    <CardFooter class="gap-4 border-t">
+                    <CardFooter class="gap-4 max-md:px-4 border-t">
                         <Button
                             v-if="!productSelection"
                             variant="outline"
                             :disabled="selectedProductStore.count === 0"
                             @click="productSelection = !productSelection"
                         >
-                            {{ selectedProductStore.count }} Products Selected</Button
-                        >
+                            {{ selectedProductStore.count }} <span class="max-md:hidden">Products Selected</span>
+                        </Button>
                         <div class="grow"></div>
                         <Button variant="outline" @click="toggleDialog()"> Cancel </Button>
                         <Button :disabled="selectedProductStore.count === 0" @click="addToOrder()">Add</Button>

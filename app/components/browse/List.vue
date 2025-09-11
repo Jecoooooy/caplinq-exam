@@ -4,7 +4,7 @@
         tabindex="-1"
         :class="
             cn(
-                'hover:!bg-accent py-5 gap-5 relative focus-within:outline-none hover:text-accent-foreground text-sm focus:bg-accent/20 flex items-center',
+                'hover:!bg-accent cursor-pointer py-5 gap-5 relative focus-within:outline-none hover:text-accent-foreground text-sm focus:bg-accent/20 flex items-center',
                 className,
             )
         "

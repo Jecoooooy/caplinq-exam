@@ -299,5 +299,5 @@ function openDialog(item: Record<string, unknown>) {
 }
 
 const container: Ref<HTMLElement | null> = ref(null);
-useEnhancedScrollbar(container, "scroll", "y");
+if (!useDevice().isMobile) useEnhancedScrollbar(container, "scroll", "y");
 </script>

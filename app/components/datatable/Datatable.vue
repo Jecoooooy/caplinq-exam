@@ -26,15 +26,16 @@
             </TableCaption>
             <TableHeader class="sticky top-0 z-20 shadow-[0_4px_4px_rgba(0,0,0,0.3)]">
                 <TableRow>
-                    <TableHead
-                        v-for="col in columns"
-                        :key="col.value"
-                        :style="col.width ? { width: col.width } : {}"
-                        :class="cn('even:bg-muted odd:bg-background', col.class)"
-                        :rowspan="col.rowspan"
-                    >
-                        {{ col.text }}
-                    </TableHead>
+                    <template v-for="col in columns" :key="col.value">
+                        <TableHead
+                            v-if="!col.expanded"
+                            :style="col.width ? { width: col.width } : {}"
+                            :class="cn('even:bg-muted odd:bg-background', col.class)"
+                            :rowspan="col.rowspan"
+                        >
+                            {{ col.text }}
+                        </TableHead>
+                    </template>
                 </TableRow>
             </TableHeader>
             <TableBody>
@@ -49,7 +50,7 @@
                         >
                             <div
                                 :style="{
-                                    animationDelay: `${(i + index + 1) * 40}ms`,
+                                    animationDelay: `${(i + index + 1) * 50}ms`,
                                 }"
                                 class="bg-primary/80 h-4 animate-pulse rounded"
                             />
@@ -107,6 +108,7 @@
                         >
                             <TableCell
                                 :key="row.id"
+                                v-if="!col.expanded"
                                 :style="{
                                     maxWidth: col.width || undefined,
                                     animationDelay: `${(i + 1) * 30}ms`,
@@ -154,9 +156,9 @@
                     </div>
                 </DialogHeader>
 
-                <ScrollArea class="max-h-96 overflow-auto">
-                    <DatatableViewer :object="dialogContent ?? {}" />
-                </ScrollArea>
+                <div ref="container" class="max-h-96 px-4 overflow-auto">
+                    <DatatableViewer :data-content="dialogContent ?? {}" />
+                </div>
 
                 <DialogFooter>
                     <DialogClose as-child>
@@ -196,6 +198,7 @@ const {
         rowspan?: number;
         searchable?: boolean;
         tooltip?: boolean;
+        expanded?: boolean;
         badge?: boolean | Record<string, BadgeVariant>;
     }[];
     title: string;
@@ -291,4 +294,7 @@ function openDialog(item: Record<string, unknown>) {
     Object.keys(dialogContent).forEach((key) => delete dialogContent[key]);
     Object.assign(dialogContent, item);
 }
+
+const container: Ref<HTMLElement | null> = ref(null);
+useEnhancedScrollbar(container, "scroll", "y");
 </script>

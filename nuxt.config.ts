@@ -34,9 +34,10 @@ export default defineNuxtConfig({
     nitro: {
         storage: {
             data: {
-                driver: "fs",
-                base: "./server/data",
+                driver: "memory",
             },
         },
+        // Ensure proper serverless deployment
+        preset: "vercel",
     },
 });

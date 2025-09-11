@@ -1,17 +1,25 @@
 <template>
     <section ref="container" class="pl-10 pr-3 animate-fade w-[calc(100%-16px)] h-80 scroll-py-1 overflow-x-hidden">
         <BrowseGroup>
-            <template v-for="(supplier, index) in filteredSuppliers" :key="supplier.id">
-                <BrowseList
-                    :index="index"
-                    class="p-4"
-                    @click="getSupplierProducts(supplier)"
-                    @keydown.enter="getSupplierProducts(supplier)"
-                >
-                    {{ supplier.name }}
-                </BrowseList>
-                <Separator />
+            <template v-if="filteredSuppliers.length">
+                <template v-for="(supplier, index) in filteredSuppliers" :key="supplier.id">
+                    <BrowseList
+                        :index="index"
+                        class="p-4"
+                        @click="getSupplierProducts(supplier)"
+                        @keydown.enter="getSupplierProducts(supplier)"
+                    >
+                        {{ supplier.name }}
+                    </BrowseList>
+                    <Separator />
+                </template>
             </template>
+            <div v-else class="py-30">
+                <div class="flex items-center justify-center space-x-3 text-foreground/50">
+                    <Icon name="mdi:information-outline" class="text-xl" />
+                    <span class="font-medium">No data available yet</span>
+                </div>
+            </div>
         </BrowseGroup>
     </section>
 </template>

@@ -30,7 +30,7 @@
                         variant="outline"
                         icon
                         size="icon-sm"
-                        @click="supplier = null"
+                        @click="((supplier = null), (search = ''))"
                     >
                         <Icon name="mdi:chevron-left" size="20"></Icon>
                     </Button>
@@ -104,7 +104,7 @@ const search = ref("");
 
 function toggleDialog() {
     // if (isModalOpen.value) supplier.value = null;
-
+    search.value = "";
     if (item?.value && itemContainer?.value) {
         const rect = item.value.getBoundingClientRect();
         itemContainer.value.style.setProperty("--item-height", `${rect.height}px`);

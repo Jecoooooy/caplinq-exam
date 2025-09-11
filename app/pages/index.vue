@@ -22,6 +22,7 @@
                             text: 'Product Name',
                             searchable: true,
                             width: '200px',
+                            badge: true,
                             class: 'text-center',
                         },
                         {
@@ -33,9 +34,10 @@
                         },
                         {
                             value: 'childProducts',
-                            text: 'Suplier Id',
-                            width: '200px',
+                            text: 'Child Products',
+
                             class: 'text-center',
+                            expanded: true,
                             searchable: true,
                             tooltip: true,
                         },

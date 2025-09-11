@@ -36,7 +36,7 @@
                 >
                     <BrowseChildProduct
                         v-if="
-                            (expandedProducts.has(product.id) || hasSelectedChildProducts(product.id)) &&
+                            (expandedProducts.has(product.id) || hasSelectedChildProducts(product.id) || search) &&
                             product.childProducts.length > 0
                         "
                         :child-products="product.childProducts"

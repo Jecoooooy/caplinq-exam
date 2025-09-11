@@ -1,8 +1,14 @@
 <template>
-    <section ref="container" class="h-full scroll-py-1 overflow-x-hidden">
+    <section ref="container" class="h-full border-t animate-fade scroll-py-1 overflow-x-hidden">
         <BrowseGroup>
-            <template v-for="(product, index) in selectedProductStore.selectedProducts" :key="product.id">
-                <BrowseList :index="index" :is-arrow-visible="false" class="px-10 group py-5 items-center gap-5">
+            <TransitionGroup name="slide-left" tag="div">
+                <BrowseList
+                    v-for="(product, index) in selectedProductStore.selectedProducts"
+                    :key="product.id"
+                    :index="index"
+                    :is-arrow-visible="false"
+                    class="px-10 group py-5 items-center gap-5"
+                >
                     <span class="text-xs">{{ index + 1 }}</span>
                     <Avatar class="!rounded-xs size-12.5 border">
                         <AvatarImage src="/images/caplinq-logo.webp" class="p-2"></AvatarImage>
@@ -30,9 +36,9 @@
                         size="20"
                         @click="deleteProduct(product)"
                     />
+                    <div class="w-[calc(100%-80px)] mx-auto absolute -bottom-0.25 bg-input h-0.5"></div>
                 </BrowseList>
-                <Separator />
-            </template>
+            </TransitionGroup>
         </BrowseGroup>
     </section>
 </template>
@@ -42,18 +48,15 @@ const selectedProductStore = useSelectedProduct();
 const { showSuccess, showError, showSuccessWithAction } = useNotification();
 
 function deleteProduct(product: SelectedProduct) {
-    // Show confirmation toast with undo action
     showSuccessWithAction(`Delete ${product.name}?`, {
         label: "Undo",
 
         onClick: () => {
-            // Restore the product
             selectedProductStore.addProduct(product);
             showSuccess(`${product.name} restored successfully.`);
         },
     });
 
-    // Actually delete the product
     selectedProductStore.deleteProduct(product.id);
 }
 

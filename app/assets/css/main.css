@@ -217,3 +217,22 @@
         width: 40px !important;
     }
 }
+
+.slide-left-enter-active,
+.slide-left-leave-active {
+    transition: all 0.3s ease;
+}
+
+.slide-left-enter-from {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.slide-left-leave-to {
+    opacity: 0;
+    transform: translateX(-100%);
+}
+
+.slide-left-move {
+    transition: transform 0.3s ease;
+}

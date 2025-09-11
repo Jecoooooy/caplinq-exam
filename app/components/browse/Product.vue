@@ -1,5 +1,5 @@
 <template>
-    <section ref="container" class="pl-10 pr-3 w-[calc(100%-16px)] h-80 scroll-py-1 overflow-x-hidden">
+    <section ref="container" class="pl-10 animate-fade pr-3 w-[calc(100%-16px)] h-80 scroll-py-1 overflow-x-hidden">
         <BrowseGroup>
             <template v-for="(product, index) in filteredProducts" :key="product.id">
                 <BrowseList
@@ -24,13 +24,23 @@
                         </p>
                     </div>
                 </BrowseList>
-                <BrowseChildProduct
-                    v-if="
-                        (expandedProducts.has(product.id) || hasSelectedChildProducts(product.id)) &&
-                        product.childProducts.length > 0
-                    "
-                    :child-products="product.childProducts"
-                />
+
+                <Transition
+                    enter-active-class="transition-all duration-300 ease-out"
+                    enter-from-class="opacity-0 max-h-0 overflow-hidden"
+                    enter-to-class="opacity-100 max-h-96"
+                    leave-active-class="transition-all duration-300 ease-in"
+                    leave-from-class="opacity-100 max-h-96"
+                    leave-to-class="opacity-0 max-h-0 overflow-hidden"
+                >
+                    <BrowseChildProduct
+                        v-if="
+                            (expandedProducts.has(product.id) || hasSelectedChildProducts(product.id)) &&
+                            product.childProducts.length > 0
+                        "
+                        :child-products="product.childProducts"
+                    />
+                </Transition>
                 <Separator />
             </template>
         </BrowseGroup>

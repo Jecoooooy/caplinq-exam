@@ -1,5 +1,5 @@
 <template>
-    <section ref="container" class="pl-10 pr-3 w-[calc(100%-16px)] h-80 scroll-py-1 overflow-x-hidden">
+    <section ref="container" class="pl-10 pr-3 animate-fade w-[calc(100%-16px)] h-80 scroll-py-1 overflow-x-hidden">
         <BrowseGroup>
             <template v-for="(supplier, index) in filteredSuppliers" :key="supplier.id">
                 <BrowseList

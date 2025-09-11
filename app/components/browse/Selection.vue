@@ -31,12 +31,13 @@
                         </NumberField>
                     </div>
                     <Icon
-                        class="md:opacity-0 group-hover:animate-fade-right cursor-pointer"
+                        class="md:opacity-0 md:group-hover:animate-fade-right cursor-pointer"
                         name="mdi:trash-outline"
                         size="20"
                         @click="deleteProduct(product)"
                     />
                     <div
+                        v-if="index + 1 !== selectedProductStore.selectedProducts.length"
                         class="w-full max-md:left-0 md:w-[calc(100%-80px)] mx-auto absolute -bottom-0.25 bg-input h-0.5"
                     ></div>
                 </BrowseList>

@@ -1,7 +1,7 @@
 <template>
     <section
         ref="container"
-        class="pl-10 max-md:px-0 max-md:mx-auto animate-fade animate-duration-300 pr-3 w-[calc(100%-16px)] h-80 scroll-py-1 overflow-x-hidden"
+        class="pl-10 max-md:px-2 max-md:mx-auto animate-fade animate-duration-300 pr-3 w-[calc(100%-16px)] h-full scroll-py-1 overflow-x-hidden"
     >
         <BrowseGroup>
             <template v-for="(product, index) in filteredProducts" :key="product.id">

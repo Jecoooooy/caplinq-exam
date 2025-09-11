@@ -13,9 +13,9 @@
             class="fixed z-40 h-svh content-center overflow-hidden backdrop-blur-md overscroll-none"
         >
             <section class="max-w-2xl px-4 md:px-8 mx-auto">
-                <Card class="relative overflow-hidden shadow-lg py-5 gap-0">
+                <Card class="relative max-md:gap-2 overflow-hidden shadow-lg py-5 gap-0">
                     <Button
-                        class="absolute right-8 top-6 animate-fade"
+                        class="absolute max-md:right-2 right-8 top-6 animate-fade"
                         variant="ghost"
                         icon
                         :ripple="false"
@@ -26,7 +26,7 @@
                     </Button>
                     <Button
                         v-if="!isEmpty(supplier, true) && selectedProductStore.count === 0"
-                        class="absolute left-10 top-6 animate-fade"
+                        class="absolute max-md:left-4 left-10 top-6 animate-fade"
                         variant="outline"
                         icon
                         size="icon-sm"
@@ -36,7 +36,7 @@
                     </Button>
                     <Button
                         v-else-if="productSelection"
-                        class="absolute left-10 top-6 animate-fade"
+                        class="absolute max-md:left-4 left-10 top-6 animate-fade"
                         variant="outline"
                         icon
                         size="icon-sm"
@@ -49,9 +49,12 @@
                             {{ productSelection ? "Selection" : toTitleCase(ActiveSupplier) }}
                         </CardTitle>
                     </CardHeader>
-                    <CardContent class="px-0 h-117.75 pt-10 flex-col flex gap-6" :class="{ 'pb-5': !productSelection }">
+                    <CardContent
+                        class="max-md:pt-4 max-md:h-100 px-0 h-117.75 pt-10 flex-col flex max-md:gap-4 gap-6"
+                        :class="{ 'pb-5': !productSelection }"
+                    >
                         <template v-if="!productSelection">
-                            <div class="px-10 border-b pb-6">
+                            <div class="px-10 max-md:px-4 max-md:pb-4 border-b pb-6">
                                 <Input
                                     v-model="search"
                                     class="h-10.5"
@@ -74,6 +77,7 @@
                             variant="outline"
                             :disabled="selectedProductStore.count === 0"
                             @click="productSelection = !productSelection"
+                            class="gap-4"
                         >
                             {{ selectedProductStore.count }} <span class="max-md:hidden">Products Selected</span>
                         </Button>

@@ -7,9 +7,9 @@
                     :key="product.id"
                     :index="index"
                     :is-arrow-visible="false"
-                    class="py-2 pl-2 pr-4 md:px-10 group md:py-5 items-center gap-5"
+                    class="py-2 pl-4 pr-4 md:px-10 group md:py-5 items-center gap-4 md:gap-5"
                 >
-                    <span class="text-xs">{{ index + 1 }}</span>
+                    <span class="text-xs">{{ index + 1 }}.</span>
                     <Avatar class="!rounded-xs size-12.5 border">
                         <AvatarImage src="/images/caplinq-logo.webp" class="p-2"></AvatarImage>
                         <AvatarFallback></AvatarFallback>

@@ -20,12 +20,7 @@ const forwarded = useForwardPropsEmits(props, emits);
             <TooltipTrigger as-child>
                 <slot />
             </TooltipTrigger>
-            <TooltipContent
-                :align="align"
-                :align-offset="0"
-                :side="side"
-                :side-offset="-4"
-            >
+            <TooltipContent :align="align" :align-offset="0" :side="side" :side-offset="-4">
                 <slot name="content">
                     <div
                         v-if="typeof content === 'object' && content"

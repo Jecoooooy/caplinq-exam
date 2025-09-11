@@ -9,8 +9,7 @@ export const useSupplier = defineStore("supplier", () => {
     async function getSuppliers() {
         suppliersPending.value = true;
         try {
-            const { data, error } =
-                await useFetch<Supplier[]>("/api/suppliers");
+            const { data, error } = await useFetch<Supplier[]>("/api/suppliers");
             suppliers.value = data.value ?? [];
             suppliersError.value = error.value;
         } finally {

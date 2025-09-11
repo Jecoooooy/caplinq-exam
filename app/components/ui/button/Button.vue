@@ -19,9 +19,7 @@ export interface Props extends PrimitiveProps {
     loading?: boolean | { type?: LoaderType; color?: HTMLAttributes["class"] };
     loadOnClick?: boolean | number; // number is how long to display loading
     icon?: boolean | "sm" | "md" | "lg";
-    tooltip?:
-        | { text?: string; side?: "top" | "bottom" | "left" | "right" }
-        | string;
+    tooltip?: { text?: string; side?: "top" | "bottom" | "left" | "right" } | string;
     hideWhenLoading?: boolean;
 }
 
@@ -36,12 +34,8 @@ const props = withDefaults(defineProps<Props>(), {
 
 const rippleRef = ref<InstanceType<typeof Ripple> | null>(null);
 
-const loadingColor = computed(
-    () => (isObject(props.loading) && props.loading?.color) || undefined,
-);
-const loadingType = computed(
-    () => (isObject(props.loading) && props.loading.type) || "FadingCircle",
-);
+const loadingColor = computed(() => (isObject(props.loading) && props.loading?.color) || undefined);
+const loadingType = computed(() => (isObject(props.loading) && props.loading.type) || "FadingCircle");
 
 const loadingSize = computed(() => {
     if ([props.size, props.icon].includes("sm")) return 6;
@@ -54,10 +48,7 @@ function clickLoad(event: MouseEvent) {
     if (props.ripple) rippleRef.value?.startRipple(event);
     if (!props.loadOnClick) return;
     clickLoading.value = true;
-    setTimeout(
-        () => (clickLoading.value = false),
-        isNumber(props.loadOnClick) ? props.loadOnClick : 500,
-    );
+    setTimeout(() => (clickLoading.value = false), isNumber(props.loadOnClick) ? props.loadOnClick : 500);
 }
 </script>
 
@@ -94,9 +85,7 @@ function clickLoad(event: MouseEvent) {
                 :size="loadingSize"
                 :class="[loadingColor, { 'mr-2': !hideWhenLoading && !icon }]"
             />
-            <slot
-                v-if="!((loading || clickLoading) && (hideWhenLoading || icon))"
-            />
+            <slot v-if="!((loading || clickLoading) && (hideWhenLoading || icon))" />
         </Primitive>
     </Tooltip>
 </template>

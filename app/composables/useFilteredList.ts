@@ -7,9 +7,7 @@ export function useFilteredList<T extends Record<string, Primitive | AnyArray>>(
         const query = search.value.trim().toLowerCase();
         const items = list.value;
         if (!query) return items;
-        return items.filter((item) =>
-            String(item[key]).toLowerCase().includes(query),
-        );
+        return items.filter((item) => String(item[key]).toLowerCase().includes(query));
     });
 
     return {

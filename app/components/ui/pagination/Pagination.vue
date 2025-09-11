@@ -63,9 +63,7 @@ const visiblePages = computed(() => {
         </div>
     </template>
     <template v-else-if="props.error">
-        <div
-            class="text-destructive flex w-full items-center justify-center py-2"
-        >
+        <div class="text-destructive flex w-full items-center justify-center py-2">
             <span class="mr-2">&#9888;</span>
             <span>error: {{ props.error }}</span>
         </div>
@@ -81,11 +79,7 @@ const visiblePages = computed(() => {
         :class="cn('flex w-full justify-between', props.class)"
         @update:page="emits('update:modelValue', $event)"
     >
-        <div
-            class="text-muted-foreground mr-4 h-8 content-center text-sm"
-            role="status"
-            aria-live="polite"
-        >
+        <div class="text-muted-foreground mr-4 h-8 content-center text-sm" role="status" aria-live="polite">
             <span
                 >{{
                     `showing ${(page - 1) * itemsPerPage + 1}/${Math.min(page * itemsPerPage, total)} out of ${total}`
@@ -105,11 +99,7 @@ const visiblePages = computed(() => {
                     :variant="pageNum === page ? 'default' : 'outline'"
                     @click="emits('update:modelValue', pageNum)"
                 >
-                    <PaginationItem
-                        as-child
-                        :value="pageNum"
-                        :is-active="pageNum === page"
-                    >
+                    <PaginationItem as-child :value="pageNum" :is-active="pageNum === page">
                         {{ pageNum }}
                     </PaginationItem>
                 </Button>

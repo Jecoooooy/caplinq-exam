@@ -1,8 +1,5 @@
 <template>
-    <div
-        class="ripple absolute inset-0 overflow-hidden"
-        style="border-radius: inherit"
-    >
+    <div class="ripple absolute inset-0 overflow-hidden" style="border-radius: inherit">
         <span
             v-for="item in ripples"
             :key="item.id"

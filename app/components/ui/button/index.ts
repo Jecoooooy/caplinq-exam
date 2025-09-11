@@ -7,23 +7,8 @@ type RemoveAutoVariant<T extends { variant?: string }> = Omit<T, "variant"> & {
 };
 
 type Props = {
-    variant?:
-        | "default"
-        | "destructive"
-        | "outline"
-        | "tonal"
-        | "secondary"
-        | "ghost"
-        | "link"
-        | "auto";
-    size?:
-        | "default"
-        | "sm"
-        | "lg"
-        | "icon-xs"
-        | "icon-sm"
-        | "icon-md"
-        | "icon-lg";
+    variant?: "default" | "destructive" | "outline" | "tonal" | "secondary" | "ghost" | "link" | "auto";
+    size?: "default" | "sm" | "lg" | "icon-xs" | "icon-sm" | "icon-md" | "icon-lg";
     elevation?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
     icon?: boolean | "sm" | "md" | "lg";
     color?:
@@ -50,12 +35,10 @@ export const buttonVariants = (baseProps: Props) => {
     const variants = {
         variant: {
             default: "bg-primary text-primary-foreground hover:brightness-110",
-            destructive:
-                "bg-destructive text-destructive-foreground hover:brightness-110",
+            destructive: "bg-destructive text-destructive-foreground hover:brightness-110",
             outline: "border backdrop-blur bg-transparent",
             tonal: "backdrop-blur-md hover:brightness-110",
-            secondary:
-                "bg-secondary text-secondary-foreground hover:brightness-110",
+            secondary: "bg-secondary text-secondary-foreground hover:brightness-110",
             ghost: "hover:brightness-110",
             link: " hover:brightness-110 underline-offset-4 decoration-2 hover:underline",
         },
@@ -83,11 +66,9 @@ export const buttonVariants = (baseProps: Props) => {
     Object.entries(variants.variant).forEach(([key, value]) => {
         variants.variant[key as keyof typeof variants.variant] = cn(
             value,
-            key === "tonal" &&
-                `text-${color} bg-${color}/10 dark:bg-${color}/40`,
+            key === "tonal" && `text-${color} bg-${color}/10 dark:bg-${color}/40`,
             ["ghost", "link"].includes(key) && `text-${color}`,
-            key === "outline" &&
-                `text-${color} border-${color}/40 dark:border-${color}/60 hover:border-${color}`,
+            key === "outline" && `text-${color} border-${color}/40 dark:border-${color}/60 hover:border-${color}`,
             key === "default" && `text-${color}-foreground bg-${color}`,
         );
     });

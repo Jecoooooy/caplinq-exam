@@ -45,8 +45,7 @@ const modelValue = useVModel(props, "modelValue", emits, {
             :name="`mdi:${icon.name}`"
             class="absolute text-muted-foreground top-1/2 -translate-y-1/2"
             :class="{
-                'right-4':
-                    icon.position === 'right' || isEmpty(icon.position, true),
+                'right-4': icon.position === 'right' || isEmpty(icon.position, true),
                 'left-4': icon.position === 'left',
             }"
             :size="icon.size ?? 24"

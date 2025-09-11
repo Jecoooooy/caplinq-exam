@@ -18,8 +18,8 @@
 <script lang="ts" setup>
 import type { Supplier } from "@/types/supplier";
 
-const { suppliers } = storeToRefs(useSupplier());
-const allSuppliers = computed(() => suppliers.value ?? []);
+const supplierStore = useSupplier();
+const allSuppliers = computed(() => supplierStore.suppliers ?? []);
 
 const search = defineModel<string>("search", { default: "" });
 const { filtered: filteredSuppliers } = useFilteredList(allSuppliers, search, "name");

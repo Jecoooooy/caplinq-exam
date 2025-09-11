@@ -10,12 +10,12 @@
                 'close-dialog': closeDelay,
                 'open-dialog': isModalOpen && !closeDelay,
             }"
-            class="fixed z-50 h-svh content-center overflow-hidden overscroll-none backdrop-blur"
+            class="fixed z-40 h-svh content-center overflow-hidden overscroll-none"
         >
             <section class="max-w-2xl px-4 md:px-8 mx-auto">
                 <Card class="relative overflow-hidden shadow-lg py-5 gap-0">
                     <Button
-                        class="absolute right-10 top-5 animate-fade"
+                        class="absolute right-8 top-6 animate-fade"
                         variant="ghost"
                         icon
                         :ripple="false"
@@ -26,7 +26,7 @@
                     </Button>
                     <Button
                         v-if="!isEmpty(supplier, true) && selectedProductStore.count === 0"
-                        class="absolute left-10 top-5 animate-fade"
+                        class="absolute left-10 top-6 animate-fade"
                         variant="outline"
                         icon
                         size="icon-sm"
@@ -36,7 +36,7 @@
                     </Button>
                     <Button
                         v-else-if="productSelection"
-                        class="absolute left-10 top-5 animate-fade"
+                        class="absolute left-10 top-6 animate-fade"
                         variant="outline"
                         icon
                         size="icon-sm"

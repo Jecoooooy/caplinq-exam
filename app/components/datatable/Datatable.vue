@@ -1,5 +1,5 @@
 <template>
-    <section class="flex h-full grow flex-col gap-4" role="region" :aria-labelledby="uniqueId">
+    <section class="flex h-full grow flex-col gap-8" role="region" :aria-labelledby="uniqueId">
         <!-- Title and Subtitle -->
         <header class="flex justify-center pb-2 gap-4 max-md:flex-col md:items-center">
             <hgroup>

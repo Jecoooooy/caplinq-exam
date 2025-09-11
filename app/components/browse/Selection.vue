@@ -24,7 +24,13 @@
                         </p>
                     </div>
                     <div class="text-xs flex items-center text-foreground/60">
-                        <NumberField :model-value="product.quantity" :min="0">
+                        <NumberField
+                            :model-value="product.quantity"
+                            :min="0"
+                            @update:model-value="
+                                (value: number) => selectedProductStore.updateQuantity(product.id, value)
+                            "
+                        >
                             <NumberFieldContent>
                                 <NumberFieldInput class="h-7 text-end px-2 rounded-xs w-17" />
                             </NumberFieldContent>

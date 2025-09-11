@@ -6,6 +6,7 @@
                     class="px-5"
                     :index="index"
                     @click="toggleExpanded(product.id)"
+                    @keydown.enter="toggleExpanded(product.id)"
                     :class="{
                         'bg-muted focus:bg-muted':
                             hasSelectedChildProducts(product.id) && product.childProducts.length > 0,

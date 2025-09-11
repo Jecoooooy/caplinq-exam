@@ -103,7 +103,7 @@ provide("supplier", supplier);
 const search = ref("");
 
 function toggleDialog() {
-    if (isModalOpen.value) supplier.value = null;
+    // if (isModalOpen.value) supplier.value = null;
 
     if (item?.value && itemContainer?.value) {
         const rect = item.value.getBoundingClientRect();

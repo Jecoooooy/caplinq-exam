@@ -37,7 +37,12 @@ useEnhancedScrollbar(container, "scroll", "y");
 
 const activeSupplier = inject<Ref<Supplier | null> | null>("supplier", null);
 
+const emit = defineEmits<{
+    resetSearch: [];
+}>();
+
 function getSupplierProducts(supplier: Supplier) {
     activeSupplier && (activeSupplier.value = supplier);
+    emit("resetSearch");
 }
 </script>

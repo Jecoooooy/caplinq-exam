@@ -42,19 +42,20 @@
                 <!-- Loading State -->
                 <template v-if="loading">
                     <TableRow v-for="i in pageSize" :key="`loading-${i}`">
-                        <TableCell
-                            v-for="(col, index) in columns"
-                            :key="col.value"
-                            :style="col.width ? { maxWidth: col.width } : {}"
-                            :class="cn('h-10 even:bg-muted', col.class)"
-                        >
-                            <div
-                                :style="{
-                                    animationDelay: `${(i + index + 1) * 50}ms`,
-                                }"
-                                class="bg-primary/80 h-4 animate-pulse rounded"
-                            />
-                        </TableCell>
+                        <template v-for="(col, index) in columns" :key="col.value">
+                            <TableCell
+                                v-if="!col.expanded"
+                                :style="col.width ? { maxWidth: col.width } : {}"
+                                :class="cn('h-10 even:bg-muted', col.class)"
+                            >
+                                <div
+                                    :style="{
+                                        animationDelay: `${(i + index + 1) * 50}ms`,
+                                    }"
+                                    class="bg-primary/80 h-4 animate-pulse rounded"
+                                />
+                            </TableCell>
+                        </template>
                     </TableRow>
                 </template>
                 <TableRow v-else-if="error">
@@ -220,6 +221,7 @@ const columns = computed(() => {
                 width: "200px",
                 tooltip: true,
                 searchable: true,
+                expanded: false,
                 rowspan: 1,
                 badge: false,
                 class: ["text-center"],
@@ -234,6 +236,7 @@ const columns = computed(() => {
         tooltip: true,
         searchable: true,
         rowspan: 1,
+        expanded: false,
         badge: false,
         class: ["text-center"],
     }));

@@ -22,7 +22,6 @@ export const useSelectedProduct = defineStore("selected", () => {
         if (product) {
             product.quantity = quantity;
         }
-        console.log(selectedProducts);
     };
 
     return {

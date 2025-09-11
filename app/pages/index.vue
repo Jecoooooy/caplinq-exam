@@ -27,7 +27,7 @@
                         },
                         {
                             value: 'supplierId',
-                            text: 'Suplier Id',
+                            text: 'Supplier Id',
                             class: 'text-center',
                             searchable: true,
                             tooltip: true,
@@ -59,6 +59,6 @@ const productsPending = ref(true);
 onMounted(() =>
     setTimeout(() => {
         productsPending.value = false;
-    }, 4000),
+    }, 2000),
 );
 </script>

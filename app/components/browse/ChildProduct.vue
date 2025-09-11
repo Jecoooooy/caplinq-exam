@@ -22,7 +22,7 @@
                     <p class="text-sm truncate font-medium">
                         {{ childProduct.name }}
                     </p>
-                    <p class="text-xs text-foreground/50">SKU: {{ childProduct.sku }}</p>
+                    <p class="text-xs truncate text-foreground/50">SKU: {{ childProduct.sku }}</p>
                 </div>
                 <div
                     class="text-xs text-foreground/60"

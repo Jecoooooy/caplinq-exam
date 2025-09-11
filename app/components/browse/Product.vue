@@ -21,9 +21,10 @@
                     </Avatar>
                     <div class="w-full pr-8 overflow-hidden">
                         <p class="truncate">
-                            {{ product.name }}
+                            {{ product.name }} wer wer ewr werwe rwer wer wer ew we rwe wer we r wer ewr ewr ewr wer ewr
+                            wer ew
                         </p>
-                        <p class="text-xs text-foreground/50">
+                        <p class="text-xs truncate text-foreground/50">
                             {{ product.id }}
                         </p>
                     </div>

@@ -3,6 +3,7 @@
         <BrowseGroup>
             <template v-for="(product, index) in filteredProducts" :key="product.id">
                 <BrowseList
+                    class="px-5"
                     :index="index"
                     @click="toggleExpanded(product.id)"
                     :class="{

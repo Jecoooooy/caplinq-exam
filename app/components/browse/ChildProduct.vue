@@ -32,7 +32,7 @@
                         :model-value="childProduct.quantity"
                         :min="0"
                         :disabled="!isChildProductSelected(childProduct.id)"
-                        @update:model-value="(value) => updateQuantity(childProduct.id, value)"
+                        @update:model-value="(value: number) => updateQuantity(childProduct.id, value)"
                     >
                         <NumberFieldContent>
                             <NumberFieldInput class="h-7 text-end px-2 rounded-xs w-17" />

@@ -9,10 +9,12 @@ export default function useEnhancedScrollbar(
 
     const updateScrollbar = (target?: HTMLElement) => {
         if (!target) return;
-        const root = document.body;
-        const primaryColor = getComputedStyle(root).getPropertyValue("--primary").trim();
-        const [l = "0", c = "0", h = "100"] = primaryColor.match(/\d+(\.\d+)?/g) ?? ["0", "0", "100"];
-
+        // const root = document.body;
+        // const primaryColor = getComputedStyle(root).getPropertyValue("--primary").trim();
+        // const [l = "0", c = "0", h = "100"] = primaryColor.match(/\d+(\.\d+)?/g) ?? ["0", "0", "100"];
+        const l = 0.4;
+        const c = 0.04;
+        const h = 269.05;
         target.classList.add("scroll-style");
         if (orientation === "auto") {
             target.style.overflow = overflow;

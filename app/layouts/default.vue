@@ -1,9 +1,10 @@
 <template>
     <div
-        class="fixed p-4 transition-all duration-1000 z-50 bg-white"
+        class="fixed p-4 transition-all duration-1000 bg-white"
         :class="{
             'size-full top-0 left-0 bg-white rounded-none': !navbar,
-            'w-xs h-14 top-2 border -translate-x-1/2 left-1/2 bg-card shadow-md rounded-md': navbar,
+            'w-[calc(100%-32px)] md:w-xs h-14 top-2 border -translate-x-1/2 left-1/2 bg-card shadow-md rounded-md':
+                navbar,
         }"
     >
         <div

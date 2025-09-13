@@ -10,7 +10,7 @@
                 'close-dialog': closeDelay,
                 'open-dialog': isModalOpen && !closeDelay,
             }"
-            class="fixed z-40 h-svh content-center overflow-hidden backdrop-blur-md overscroll-none"
+            class="fixed z-40 h-svh content-center overflow-hidden bg-muted/70 backdrop-blur-lg overscroll-none"
         >
             <section class="max-w-2xl px-4 md:px-8 mx-auto">
                 <Card class="relative max-md:gap-2 overflow-hidden shadow-lg py-5 gap-0">

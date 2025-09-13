@@ -7,6 +7,7 @@
         }"
     >
         <div
+            ref="rollingBoxRef"
             class="animate-rolling-box z-10 drop-shadow-[-4px_4px_4px_rgba(0,0,0,0.5)] absolute size-fit"
             :class="{
                 'scale-30 md:scale-14 left-6 top-5 md:left-0 md:top-0 !translate-0 duration-1000 transition-all':
@@ -47,13 +48,18 @@
 <script lang="ts" setup>
 const hide = ref(false);
 const navbar = ref(false);
+const rollingBoxRef = ref<HTMLElement>();
+
 onMounted(() => {
-    setTimeout(() => {
-        hide.value = true;
-    }, 1000);
-    setTimeout(() => {
-        navbar.value = true;
-    }, 2000);
+    // Listen for the rolling animation to complete
+    if (rollingBoxRef.value) {
+        rollingBoxRef.value.addEventListener("animationend", () => {
+            hide.value = true;
+            setTimeout(() => {
+                navbar.value = true;
+            }, 900);
+        });
+    }
 });
 </script>
 

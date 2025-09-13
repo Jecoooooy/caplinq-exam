@@ -1,5 +1,5 @@
 <template>
-    <section class="container h-svh py-4 md:py-20 mx-auto">
+    <section class="container h-svh pt-20 pb-4 md:py-20 mx-auto">
         <Card class="shadow-md py-8 animate-fade h-full relative">
             <Browse></Browse>
             <CardContent class="h-full px-4 md:px-16">
@@ -59,6 +59,6 @@ const productsPending = ref(true);
 onMounted(() =>
     setTimeout(() => {
         productsPending.value = false;
-    }, 2000),
+    }, 4000),
 );
 </script>

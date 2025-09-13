@@ -1,6 +1,6 @@
 <template>
     <section class="container h-svh py-4 md:py-20 mx-auto">
-        <Card class="shadow-md animate-fade h-full relative">
+        <Card class="shadow-md py-8 animate-fade h-full relative">
             <Browse></Browse>
             <CardContent class="h-full px-4 md:px-16">
                 <Datatable
@@ -8,7 +8,7 @@
                     :items="allProducts"
                     search-placeholder="Search by SKU or Products"
                     :loading="productsPending"
-                    :error="null"
+                    :error="error?.message"
                     :headers="[
                         {
                             value: 'id',

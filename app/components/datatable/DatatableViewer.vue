@@ -1,6 +1,6 @@
 <template>
     <!-- Handle root level array -->
-    <div v-if="Array.isArray(dataContent)" class="space-y-6">
+    <div v-if="isArray(dataContent)" class="space-y-6">
         <div
             v-for="(item, index) in dataContent"
             :key="index"
@@ -19,8 +19,7 @@
     <template v-else>
         <div v-for="(value, key) in dataContent" :key="key" class="space-y-2">
             <!-- Array Content -->
-
-            <div v-if="Array.isArray(value)" class="mb-4">
+            <div v-if="isArray(value)" class="mb-4">
                 <div class="mb-2 flex items-center gap-2">
                     <div class="bg-primary h-2 w-2 rounded-full"></div>
                     <h3 class="text-lg font-semibold">{{ toTitleCase(key) }}</h3>

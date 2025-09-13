@@ -37,7 +37,6 @@ export default defineNuxtConfig({
                 driver: "memory",
             },
         },
-        // Ensure proper serverless deployment
         preset: "vercel",
     },
 });

@@ -1,6 +1,5 @@
 <template>
     <section class="flex h-full grow flex-col gap-8" role="region" :aria-labelledby="uniqueId">
-        <!-- Title and Subtitle -->
         <header class="flex justify-center pb-2 gap-4 max-md:flex-col md:items-center">
             <hgroup>
                 <h2 :id="uniqueId" class="tracking-wide text-xl text-muted-foreground">
@@ -19,7 +18,6 @@
             :icon="{ name: 'magnify', size: 32 }"
             class="h-16 pl-6 text-xl"
         />
-        <!-- Table -->
         <Table>
             <TableCaption v-if="title" class="sr-only">
                 {{ title }}
@@ -39,7 +37,6 @@
                 </TableRow>
             </TableHeader>
             <TableBody>
-                <!-- Loading State -->
                 <template v-if="loading">
                     <TableRow v-for="i in pageSize" :key="`loading-${i}`">
                         <template v-for="(col, index) in columns" :key="col.value">
@@ -135,7 +132,6 @@
             </TableBody>
         </Table>
 
-        <!-- Pagination -->
         <Pagination
             v-model="currentPage"
             :error="error"
@@ -156,11 +152,9 @@
                         <DialogDescription>{{ dialogContent.id }}</DialogDescription>
                     </div>
                 </DialogHeader>
-
                 <div ref="container" class="max-h-96 px-4 overflow-auto">
                     <DatatableViewer :data-content="dialogContent ?? {}" />
                 </div>
-
                 <DialogFooter>
                     <DialogClose as-child>
                         <Button variant="destructive">Close</Button>

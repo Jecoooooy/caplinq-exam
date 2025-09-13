@@ -51,7 +51,6 @@ const navbar = ref(false);
 const rollingBoxRef = ref<HTMLElement>();
 
 onMounted(() => {
-    // Listen for the rolling animation to complete
     if (rollingBoxRef.value) {
         rollingBoxRef.value.addEventListener("animationend", () => {
             hide.value = true;
@@ -59,6 +58,14 @@ onMounted(() => {
                 navbar.value = true;
             }, 900);
         });
+    } else {
+        console.warn("Rolling box ref not found, using fallback timing");
+        setTimeout(() => {
+            hide.value = true;
+            setTimeout(() => {
+                navbar.value = true;
+            }, 900);
+        }, 1000);
     }
 });
 </script>
